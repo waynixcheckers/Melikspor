@@ -3,188 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melik Spor | Canlı Maç Merkezi</title>
+    <title>Melik spor HD</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        :root {
-            --primary: #fbbf24; /* Altın/Sarı tonu */
-            --danger: #ef4444;
-            --bg-dark: #020617;
-            --card-bg: #1e293b;
-        }
-
         body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: sans-serif;
+            background-color: #121212;
             color: white;
-            padding-bottom: 50px;
-        }
-
-        /* Dinamik Header */
-        header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--primary);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        header h1 {
             margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .container {
-            width: 95%;
-            max-width: 1100px;
-            margin: 20px auto;
-        }
-
-        /* Kategori Başlıkları */
-        .category-title {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            margin: 30px 0 15px;
-            padding-left: 10px;
-            border-left: 4px solid var(--primary);
-        }
-
-        /* Maç Kartı Tasarımı */
-        .match-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .match-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .match-header {
-            padding: 15px;
-            background: rgba(0,0,0,0.2);
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
         }
-
-        .live-label {
-            background: var(--danger);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            animation: flash 1.5s infinite;
-        }
-
-        /* Video Alanı */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
-        }
-
-        /* Kanal Listesi (Gelecek İçin Hazır Yapı) */
-        .grid-channels {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .channel-item {
-            background: var(--card-bg);
+        header {
             padding: 20px;
-            border-radius: 10px;
+            width: 100%;
             text-align: center;
+            background-color: #1f1f1f;
+            border-bottom: 2px solid #333;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 20px;
+        }
+        .tabs {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        .tab-button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
             cursor: pointer;
-            border: 1px solid transparent;
+            border-radius: 5px;
+            font-weight: bold;
         }
-
-        .channel-item:hover {
-            background: #334155;
-            border-color: var(--primary);
+        .tab-button:hover {
+            background-color: #555;
         }
-
-        @keyframes flash {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+        .tab-button.active {
+            background-color: #e50914; /* Spor kanalı vurgusu için kırmızı */
         }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #64748b;
-            font-size: 14px;
+        #video-container {
+            width: 100%;
+            background-color: black;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
-        /* Mobil Düzenleme */
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
+        video {
+            width: 100%;
+            height: 100%;
+        }
+        .status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>MELİK SPOR</h1>
-        <p style="color: var(--primary); font-weight: bold;">Kalitenin Tek Adresi</p>
-    </header>
+<header>
+    <h1>Melik spor HD</h1>
+</header>
 
-    <div class="container">
-        
-        <div class="category-title">
-            <span>🔥</span> CANLI MAÇLAR
-        </div>
-
-        <div class="match-card">
-            <div class="match-header">
-                <span style="font-weight: bold;">Liverpool - Galatasaray</span>
-                <span class="live-label">CANLI</span>
-            </div>
-            
-            <div class="video-wrapper">
-                <iframe 
-                    src="https://cdn.theoplayer.com/demos/iframe/theoplayer.html?autoplay=false&muted=false&preload=none&src=https://tv-trt1-dash.medya.trt.com.tr/master.mpd" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-
-        <div class="category-title">
-            <span>📺</span> KANALLAR
-        </div>
-
-        <div class="grid-channels">
-            <div class="channel-item">Spor Smart</div>
-            <div class="channel-item">Bein Sports 1</div>
-            <div class="channel-item">TRT Spor</div>
-            <div class="channel-item">S Sport</div>
-        </div>
-
+<div class="container">
+    <h3>Kanallar</h3>
+    <div class="tabs">
+        <button class="tab-button" onclick="playM3U8('https://test-url-buraya.m3u8', this)">BeinSports 1</button>
+        <button class="tab-button" onclick="playM3U8('https://dga1op10s1u3leo.ec876fd9240622.click/live/xbeinsports-2/playlist.m3u8', this)">BeinSports 2</button>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Melik Spor Yayın Grubu</p>
-        <p style="font-size: 10px;">Bu site eğitim amaçlı bir demo tasarımıdır.</p>
-    </footer>
+    <div id="video-container">
+        <video id="video" controls autoplay></video>
+    </div>
+    
+    <div class="status" id="status-text">Kanal seçiniz...</div>
+</div>
+
+<script>
+    function playM3U8(url, button) {
+        var video = document.getElementById('video');
+        var status = document.getElementById('status-text');
+        
+        // Aktif buton rengini güncelle
+        var buttons = document.getElementsByClassName('tab-button');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+        button.classList.add('active');
+
+        status.innerText = "Yükleniyor: " + button.innerText;
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } 
+        // Safari gibi HLS'yi yerel destekleyen tarayıcılar için
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        } else {
+            alert("Tarayıcınız bu yayın formatını desteklemiyor.");
+        }
+    }
+
+    // Bein 2'yi başlangıçta otomatik yüklemek istersen burayı açabilirsin:
+    // document.querySelectorAll('.tab-button')[1].click();
+</script>
 
 </body>
 </html>
