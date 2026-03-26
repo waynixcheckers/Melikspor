@@ -3,311 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisionStream HD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <title>Bektaşspor Resmi Web Sitesi | Yeni Bir Devir Başlıyor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-        body { background-color: #050505; color: #e5e7eb; font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-        .hero-gradient { background: linear-gradient(to top, #050505 10%, transparent 70%); }
-        .card-hover { transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .card-hover:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2); }
-        
-        /* PLAN SEÇME KISMI (DOKUNULMAZ) */
-        .red-glow-border { border: 3px solid #dc2626; box-shadow: 0 0 15px rgba(220, 38, 38, 0.5); }
-        .blue-border { border: 3px solid #2563eb; }
+        /* --- GENEL TASARIM --- */
+        :root {
+            --primary-green: #004d00;
+            --dark-green: #003300;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --text-color: #2d2d2d;
+        }
 
-        /* Profil Yan Panel */
-        #profilePanel { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
-        #profilePanel.active { transform: translateX(0); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .episode-list { max-height: 450px; overflow-y: auto; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & LOGO DÜZENLEME --- */
+        header { width: 100%; position: relative; }
+
+        .top-green-bar {
+            background-color: var(--dark-green);
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 15px;
+            background: white;
+            border-radius: 50%; /* Dış çerçeveyi yuvarlak yapar */
+            border: 4px solid var(--dark-green);
+            width: 130px;
+            height: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            overflow: hidden; /* Logonun siyah köşelerini keser */
+        }
+
+        .logo-container img {
+            width: 105%; /* Siyahlıkları dışarıda bırakmak için hafif büyütüldü */
+            height: 105%;
+            object-fit: cover; /* Siyah köşelerin görünmesini engeller */
+        }
+
+        nav {
+            background-color: var(--primary-green);
+            padding: 60px 10px 15px 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; margin-bottom: 25px; }
+
+        .btn-main {
+            background-color: #ffffff;
+            color: var(--dark-green);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* --- İÇERİK ALANI --- */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        h2 {
+            border-left: 5px solid var(--primary-green);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            color: var(--dark-green);
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-body { padding: 20px; }
+        .card-body h3 { margin-bottom: 10px; color: var(--primary-green); }
+        .card-body p { font-size: 0.95rem; color: #555; line-height: 1.5; }
+
+        .badge-new {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .sponsor-call {
+            background: var(--primary-green);
+            color: white;
+            text-align: center;
+        }
+
+        .sponsor-call i { font-size: 2rem; margin-bottom: 10px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+            .logo-container { width: 110px; height: 110px; }
+            nav ul { gap: 10px; }
+            nav ul li a { font-size: 11px; }
+        }
     </style>
 </head>
 <body>
 
-    <nav class="flex items-center justify-between px-8 py-4 fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
-        <div class="flex items-center gap-10">
-            <h1 class="text-2xl font-black tracking-tighter uppercase">
-                <span class="text-white">Vision</span><span class="text-blue-500">Stream</span>
-            </h1>
-            <ul class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-widest text-gray-400">
-                <li class="hover:text-white cursor-pointer transition">Anasayfa</li>
-                <li class="hover:text-white cursor-pointer transition">Diziler</li>
-                <li class="hover:text-white cursor-pointer transition">Filmler</li>
+    <header>
+        <div class="top-green-bar">
+            <div class="logo-container">
+                <img src="https://i.hizliresim.com/4ofgwva.png" alt="Bektaşspor Logo">
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Ana Sayfa</a></li>
+                <li><a href="#">Kulübümüz</a></li>
+                <li><a href="#">Projeler</a></li>
+                <li><a href="#">Sponsorluk</a></li>
+                <li><a href="#">İletişim</a></li>
             </ul>
-        </div>
-
-        <div class="flex items-center gap-6">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="toggleProfile()">
-                <div id="navAvatar" class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-bold text-xs shadow-lg text-white">U</div>
-                <p class="hidden sm:block text-[10px] font-bold text-gray-400">PROKİLM <br><span id="navUsername" class="text-white text-xs uppercase">User</span></p>
-            </div>
-        </div>
-    </nav>
-
-    <div id="profileOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden" onclick="toggleProfile()"></div>
-    <aside id="profilePanel" class="fixed top-0 right-0 h-full w-72 bg-[#0a0a0a] z-[70] border-l border-white/5 shadow-2xl">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-10 text-white">
-                <h3 class="text-sm font-bold uppercase tracking-tight">Profil Ayarları</h3>
-                <button onclick="toggleProfile()" class="text-gray-500 hover:text-white text-lg">&times;</button>
-            </div>
-            <div class="flex flex-col items-center mb-8">
-                <div id="panelAvatar" class="w-20 h-20 bg-blue-600 rounded-xl flex items-center justify-center text-2xl font-black text-white shadow-2xl mb-4">U</div>
-                <button class="text-[9px] text-gray-500 uppercase font-bold tracking-widest hover:text-blue-500 transition">Görseli Değiştir</button>
-            </div>
-            <div class="space-y-6">
-                <div>
-                    <label class="text-[9px] text-gray-500 uppercase font-bold mb-2 block tracking-widest">Kullanıcı Adı</label>
-                    <input type="text" id="usernameInput" placeholder="Kullanıcı Adı" class="w-full bg-zinc-900 border border-white/5 rounded py-2 px-3 text-sm focus:border-blue-500 outline-none transition text-white">
-                </div>
-                <button onclick="saveProfile()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded font-bold text-sm transition uppercase">Kaydet</button>
-            </div>
-        </div>
-    </aside>
-
-    <header class="relative h-[60vh] w-full flex items-end pb-16 px-8">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070')] bg-cover bg-center -z-10 opacity-30"></div>
-        <div class="hero-gradient absolute inset-0 -z-10"></div>
-        <div class="max-w-2xl">
-            <h2 class="text-6xl font-black mb-4 tracking-tighter uppercase leading-none text-white italic">Sınır Yok</h2>
-            <button class="bg-white text-black px-10 py-3 rounded font-black hover:bg-gray-200 transition text-xs uppercase tracking-widest">Şimdi İzle</button>
-        </div>
+        </nav>
     </header>
 
-    <main class="px-8 mt-10 space-y-16 pb-24">
-        
-        <section>
-            <h3 class="text-sm font-bold mb-6 flex items-center gap-2 border-l-4 border-blue-600 pl-3 uppercase tracking-widest text-white">Popüler Diziler</h3>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-6">
-                <div class="card-hover cursor-pointer rounded overflow-hidden bg-zinc-900 shadow-xl" onclick="openEpisodes()">
-                    <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hjVNQA2a12OxkpDEOQTBMbKVZ1K.jpg" class="w-full h-auto aspect-[2/3] object-cover">
-                    <div class="p-3">
-                        <h4 class="font-bold text-xs truncate text-white uppercase">Stranger Things</h4>
-                        <p class="text-[9px] text-blue-500 font-bold uppercase mt-1">Dizi</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>BEKTAŞSPOR: <br> YENİ BİR DEVİR BAŞLIYOR!</h1>
+            <p>Mahallemizin Gücü, Gençliğin Geleceği.</p>
+            <a href="#sponsor" class="btn-main">BİZE DESTEK OL</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="main-grid">
+            <div class="news-area">
+                <h2>GÜNCEL DURUMUMUZ</h2>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=800" alt="Kuruluş">
+                    <div class="card-body">
+                        <span class="badge-new">DUYURU</span>
+                        <h3>Heyecanla Kuruluyoruz!</h3>
+                        <p>Bektaşspor olarak temellerimizi atıyoruz. Sportif başarıdan ziyade, gençliğimize sahip çıkacak, disiplinli ve ahlaklı sporcular yetiştirecek bir yapı kurmak için kollarımızı sıvadık. Çok yakında sahalardayız!</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&q=80&w=800" alt="Yetenek">
+                    <div class="card-body">
+                        <h3>İlk Adımlar: Altyapı Hazırlıkları</h3>
+                        <p>Yeni bir kulüp olmanın verdiği enerjiyle, ilk etapta bölge gençlerini bir araya getirecek seçmelerimiz ve antrenman programlarımız üzerinde çalışıyoruz. Detaylar çok yakında burada olacak.</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section>
-            <h3 class="text-sm font-bold mb-6 flex items-center gap-2 border-l-4 border-blue-600 pl-3 uppercase tracking-widest text-white">Gişe Filmleri</h3>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-6">
-                <div class="card-hover cursor-pointer rounded overflow-hidden bg-zinc-900 shadow-xl" onclick="openModal('https://box-1035-f2.vmeas.cloud/hls/,xqx2pno275okjiqbtfis5lknxe36alobcwozn7azc5bhgmcx6kqmcqqpr7ba,.urlset/master.m3u8')">
-                    <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/exsByu9wCHLHLzjPXxhwQZXGIbA.jpg" class="w-full h-auto aspect-[2/3] object-cover">
-                    <div class="p-3">
-                        <h4 class="font-bold text-xs truncate text-white uppercase">El Camino</h4>
-                        <p class="text-[9px] text-blue-500 font-bold uppercase mt-1">Film</p>
-                    </div>
+            <div class="sidebar-area">
+                <div class="sidebar-box sponsor-call" id="sponsor">
+                    <i class="fas fa-handshake"></i>
+                    <h3>SPONSOR ARIYORUZ</h3>
+                    <p style="margin: 15px 0; font-size: 0.9rem;">Bektaşspor'un bu heyecanlı yolculuğunda yanımızda olacak, formamızda ve tesislerimizde yer alacak yol arkadaşları arıyoruz.</p>
+                    <a href="mailto:iletisim@bektasspor.com" class="btn-main" style="padding: 8px 15px; font-size: 0.8rem;">TEKLİF AL / VER</a>
+                </div>
+                <div class="sidebar-box">
+                    <h3>VİZYONUMUZ</h3>
+                    <p style="font-size: 0.9rem; color: #666;">"Sadece bir spor kulübü değil, bir aile olmak." Hedefimiz, 2025 yılı sonunda bölgenin en saygın spor organizasyonlarından biri haline gelmek.</p>
                 </div>
             </div>
-        </section>
-
-        <section class="py-16 bg-zinc-900/30 rounded-3xl border border-white/5 p-8">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-black text-white tracking-tighter italic">İzleme Deneyimini Özelleştir</h3>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-zinc-950 p-8 rounded-3xl flex flex-col blue-border">
-                    <h4 class="text-lg font-bold text-blue-400 uppercase tracking-widest">Ultra Eğlence</h4>
-                    <div class="mt-2 flex items-baseline mb-6"><span class="text-5xl font-black text-white">20₺</span><span class="text-gray-500 text-xs ml-2">/aylık</span></div>
-                    <ul class="space-y-3 mb-8 flex-grow text-xs text-gray-400">
-                        <li>Sınırsız Film ve Dizi Erişimi</li>
-                        <li>4K Ultra HD Görüntü Kalitesi</li>
-                        <li>Reklamsız İzleme</li>
-                    </ul>
-                    <button class="w-full bg-blue-600 py-3 rounded-xl font-bold text-sm text-white uppercase shadow-lg">Seç</button>
-                </div>
-                <div class="bg-zinc-950 p-8 rounded-3xl flex flex-col red-glow-border relative">
-                    <div class="absolute -top-3 right-6 bg-red-600 text-white text-[9px] font-black px-4 py-1 rounded-full uppercase">En Kapsamlı</div>
-                    <h4 class="text-lg font-bold text-red-500 uppercase tracking-widest">Ultra + Canlı Maç</h4>
-                    <div class="mt-2 flex items-baseline mb-6"><span class="text-5xl font-black text-white">50₺</span><span class="text-gray-500 text-xs ml-2">/aylık</span></div>
-                    <ul class="space-y-3 mb-8 flex-grow text-xs text-gray-400">
-                        <li class="text-white font-bold italic">Tüm Özellikler + Canlı Maçlar</li>
-                        <li>Geriye Dönük İzleme</li>
-                    </ul>
-                    <button class="w-full bg-red-600 py-3 rounded-xl font-bold text-sm text-white uppercase shadow-lg shadow-red-600/20">Abone Ol</button>
-                </div>
-            </div>
-            <div class="text-center mt-12 opacity-50">
-                <h1 class="text-[10px] font-black tracking-widest uppercase text-white">Vision<span class="text-blue-500">Stream</span></h1>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <div id="episodeModal" class="fixed inset-0 bg-black/98 z-[110] hidden flex items-center justify-center p-4">
-        <div class="w-full max-w-3xl bg-[#0a0a0a] border border-white/5 rounded-3xl p-8 relative">
-            <button onclick="closeEpisodes()" class="absolute top-6 right-6 text-2xl text-gray-500 hover:text-white">&times;</button>
-            <h2 class="text-xl font-black text-white mb-6 uppercase tracking-tighter">Stranger Things</h2>
-            <select id="seasonSelect" onchange="loadEpisodes()" class="bg-zinc-900 text-white text-xs p-2 rounded-lg mb-6 border border-white/10 outline-none">
-                <option value="1">Sezon 1</option>
-                <option value="2">Sezon 2</option>
-                <option value="3">Sezon 3</option>
-                <option value="4">Sezon 4</option>
-                <option value="5">Sezon 5</option>
-            </select>
-            <div id="episodeContainer" class="episode-list grid grid-cols-1 gap-2 pr-2"></div>
+    <footer>
+        <p><strong>Bektaşspor Kulübü</strong></p>
+        <p style="font-size: 0.8rem; margin: 10px 0; opacity: 0.7;">Resmi Web Sitesi - Kuruluş 2025</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-    </div>
+        <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.5;">&copy; 2025 Tüm Hakları Saklıdır.</p>
+    </footer>
 
-    <div id="videoModal" class="fixed inset-0 bg-black/95 z-[120] hidden flex items-center justify-center p-4">
-        <button onclick="closeModal()" class="absolute top-6 right-6 text-3xl text-gray-400 hover:text-white z-[130]">&times;</button>
-        
-        <div class="w-full max-w-5xl aspect-video bg-black rounded-xl shadow-2xl border border-white/5 relative overflow-hidden">
-            
-            <div id="adContainer" class="absolute inset-0 z-10 bg-zinc-900 flex flex-col items-center justify-center hidden">
-                <span class="absolute top-4 left-4 bg-yellow-500 text-black text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest z-30">Sponsorlu İçerik</span>
-                
-                <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1965&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 z-10">
-                
-                <h3 class="text-white text-3xl font-black z-20 uppercase tracking-tighter mb-2">VisionStream Reklam Alanı</h3>
-                <p class="text-gray-300 text-sm z-20">Asıl videonuz birazdan başlayacak...</p>
-                
-                <button id="skipAdBtn" class="absolute bottom-6 right-6 bg-white/10 backdrop-blur border border-white/20 text-white px-6 py-2 rounded text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed z-30">
-                    Reklamı Geç (5)
-                </button>
-            </div>
-
-            <iframe id="videoPlayer" src="" class="w-full h-full absolute inset-0 z-0 hidden" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <script>
-        const seriesData = {
-            1: [
-                {name: "1. Bölüm: Will Byers'ın Kayboluşu", link: "https://vs15.photour.org/v/Stranger.Things.S01E01.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "2. Bölüm: Maple Sokağı'ndaki Kaçık", link: "https://vs19.photofunia.pro/v/Stranger.Things.S01E02.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "3. Bölüm: Noel Işıkları", link: "https://vs9.photomag.biz/v/Stranger.Things.S01E03.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "4. Bölüm: Ceset", link: "https://vs18.gamephotos.pro/v/Stranger.Things.S01E04.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "5. Bölüm: Pire ve İp Cambazı", link: "https://vs14.photofunny.org/v/Stranger.Things.S01E05.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "6. Bölüm: Canavar", link: "https://vs14.gamephotos.pro/v/Stranger.Things.S01E06.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "7. Bölüm: Küvet", link: "https://vs12.photoflax.org/v/Stranger.Things.S01E07.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"},
-                {name: "8. Bölüm: Baş Aşağı", link: "https://vs14.photoflix.org/v/Stranger.Things.S01E08.WEBRip.1080p.DUAL.x264-HDM/master.m3u8"}
-            ],
-            2: [
-                {name: "1. Bölüm: Madmax", link: "https://vs15.photour.org/v/Stranger.Things.S02E01.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "2. Bölüm: Şeker mi Şaka mı Kaçık", link: "https://vs15.photostack.net/v/Stranger.Things.S02E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "3. Bölüm: İribaş", link: "https://vs9.photomag.biz/v/Stranger.Things.S02E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "4. Bölüm: Bilge Will", link: "https://vs18.photomag.biz/v/Stranger.Things.S02E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "5. Bölüm: Dig Dug", link: "https://vs12.photostack.net/v/Stranger.Things.S02E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "6. Bölüm: Casus", link: "https://vs11.photoflix.org/v/Stranger.Things.S02E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "7. Bölüm: Kayıp Kız Kardeş", link: "https://vs9.gamephotos.pro/v/Stranger.Things.S02E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "8. Bölüm: Zihin Hırsızı", link: "https://vs15.photostack.net/v/Stranger.Things.S02E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"},
-                {name: "9. Bölüm: Kapı", link: "https://vs10.pictureflix.org/v/Stranger.Things.S02E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8"}
-            ],
-            3: [
-                {name: "1. Bölüm: Suzi, Duyuyor Musun?", link: ""},
-                {name: "2. Bölüm: Alışveriş Merkezi Fareleri", link: ""},
-                {name: "3. Bölüm: Kayıp Cankurtaran Vakası", link: ""},
-                {name: "4. Bölüm: Sauna Testi", link: ""},
-                {name: "5. Bölüm: Ele Geçirilenler", link: ""},
-                {name: "6. Bölüm: E Pluribus Unum", link: ""},
-                {name: "7. Bölüm: Isırık", link: ""},
-                {name: "8. Bölüm: Starcourt Savaşı", link: ""}
-            ],
-            4: [
-                {name: "1. Bölüm: Hellfire Kulübü", link: ""},
-                {name: "2. Bölüm: Vecna'nın Laneti", link: ""},
-                {name: "3. Bölüm: Canavar ve Kahraman", link: ""},
-                {name: "4. Bölüm: Sevgili Billy", link: ""},
-                {name: "5. Bölüm: Nina Projesi", link: ""},
-                {name: "6. Bölüm: Dalış", link: ""},
-                {name: "7. Bölüm: Hawkins Laboratuvarı Katliamı", link: ""},
-                {name: "8. Bölüm: Baba", link: ""},
-                {name: "9. Bölüm: Otostop", link: ""}
-            ],
-            5: [
-                {name: "1. Bölüm", link: ""},
-                {name: "2. Bölüm", link: ""},
-                {name: "3. Bölüm", link: ""},
-                {name: "4. Bölüm", link: ""},
-                {name: "5. Bölüm", link: ""},
-                {name: "6. Bölüm", link: ""},
-                {name: "7. Bölüm", link: ""},
-                {name: "8. Bölüm", link: ""}
-            ]
-        };
-
-        function toggleProfile() {
-            document.getElementById('profilePanel').classList.toggle('active');
-            document.getElementById('profileOverlay').classList.toggle('hidden');
-        }
-
-        function saveProfile() {
-            const name = document.getElementById('usernameInput').value || "User";
-            document.getElementById('navUsername').innerText = name;
-            document.getElementById('navAvatar').innerText = name[0].toUpperCase();
-            document.getElementById('panelAvatar').innerText = name[0].toUpperCase();
-            toggleProfile();
-        }
-
-        function openEpisodes() { 
-            document.getElementById('episodeModal').classList.remove('hidden'); 
-            loadEpisodes(); 
-        }
-        function closeEpisodes() { document.getElementById('episodeModal').classList.add('hidden'); }
-
-        function loadEpisodes() {
-            const s = document.getElementById('seasonSelect').value;
-            const c = document.getElementById('episodeContainer');
-            c.innerHTML = seriesData[s].map(ep => `
-                <div onclick="openModal('${ep.link}')" class="bg-zinc-900/50 p-4 rounded-xl cursor-pointer hover:bg-blue-600/20 text-xs font-bold transition flex justify-between items-center text-gray-300 hover:text-white border border-white/5">
-                    <span>${ep.name}</span><i class="fas fa-play-circle text-blue-500 text-lg"></i>
-                </div>
-            `).join('');
-        }
-
-        // --- YENİ REKLAM SİSTEMİ ---
-        let adTimer;
-        function openModal(u) {
-            if(!u) return alert("Bölüm linki henüz eklenmemiş!");
-            
-            const videoModal = document.getElementById('videoModal');
-            const adContainer = document.getElementById('adContainer');
-            const videoPlayer = document.getElementById('videoPlayer');
-            const skipAdBtn = document.getElementById('skipAdBtn');
-
-            // Başlangıç ayarları: Reklamı göster, videoyu gizle
-            videoModal.classList.remove('hidden');
-            adContainer.classList.remove('hidden');
-            videoPlayer.classList.add('hidden');
-            videoPlayer.src = ""; // Eski videoyu sıfırla
-
-            let timeLeft = 5; // 5 Saniye bekleme
-            skipAdBtn.innerText = `Reklamı Geç (${timeLeft})`;
-            skipAdBtn.disabled = true;
-            skipAdBtn.classList.remove('hover:bg-white/20');
-            skipAdBtn.onclick = null;
-
-            // Geri Sayım İşlemi
-            adTimer = setInterval(() => {
-                timeLeft--;
-                if(timeLeft > 0) {
-                    skipAdBtn.innerText = `Reklamı Geç (${timeLeft})`;
-                } else {
-                    clearInterval(adTimer);
-                    skipAdBtn.innerText = "Reklamı Geç >";
-                    skipAdBtn.disabled = false;
-                    skipAdBtn.classList.add('hover:bg-white/20');
-                    
-                    // Reklamı Geç'e basıldığında
-                    skipAdBtn.onclick = () => {
-                        adContainer.classList.add('hidden'); // Reklamı gizle
-                        videoPlayer.classList.remove('hidden'); // Videoyu göster
-                        videoPlayer.src = u; // Tıklanan linki iframe'e aktar ve başlat
-                    };
-                }
-            }, 1000);
-        }
-
-        function closeModal() {
-            clearInterval(adTimer); // Modal erken kapanırsa sayacı durdur
-            document.getElementById('videoPlayer').src = "";
-            document.getElementById('videoModal').classList.add('hidden');
-        }
-    </script>
 </body>
-                                                                                                              </html>
+</html>
